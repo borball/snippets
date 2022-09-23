@@ -1,4 +1,4 @@
-## Snippets Collection for random topics
+## Snippets collection of random topics
 
 ### OpenShift
 
