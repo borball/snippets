@@ -2,5 +2,5 @@
 
 ### OpenShift
 
-- [How to use Machine Config to update ulimit](ulimit-mc.md)
-- [How to use Machine Config to renice etcd readyz container](etcd-readyz-renice-mc.md)
+- [How to use MachineConfig to update ulimit](ulimit-mc.md)
+- [How to use MachineConfig to renice etcd readyz container](etcd-readyz-renice-mc.md)

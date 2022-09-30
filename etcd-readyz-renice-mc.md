@@ -1,6 +1,17 @@
-## How to use MachineConfig to renice etct readyz container
+## How to use MachineConfig to renice etcd readyz container
 
-### MC
+### MachineConfig
+
+```shell
+cat << EOF | base64 -w0
+#!/usr/bin/env bash
+
+ls /proc/$(pgrep -f 'cluster-etcd-operator readyz')/task | xargs renice -10
+EOF
+
+IyEvdXNyL2Jpbi9lbnYgYmFzaAoKbHMgL3Byb2MvJChwZ3JlcCAtZiAnY2x1c3Rlci1ldGNkLW9wZXJhdG9yIHJlYWR5eicpL3Rhc2sgfCB4YXJncyByZW5pY2UgLTEw
+```
+
 
 ```yaml
 ---
