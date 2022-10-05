@@ -1,0 +1,51 @@
+---
+apiVersion: machineconfiguration.openshift.io/v1
+kind: MachineConfig
+metadata: 
+  labels: 
+    machineconfiguration.openshift.io/role: master
+  name: 02-master-etcd-readyz-renice
+spec: 
+  config:
+    ignition: 
+      config: 
+        replace: 
+          verification: {}
+      proxy: {}
+      security: 
+        tls: {}
+      timeouts: {}
+      version: 3.2.0
+    passwd: {}
+    storage:
+      files: 
+      - contents: 
+          source: data:text/plain;charset=utf-8;base64,IyEvdXNyL2Jpbi9lbnYgYmFzaAoKbHMgL3Byb2MvJChwZ3JlcCAtZiAnY2x1c3Rlci1ldGNkLW9wZXJhdG9yIHJlYWR5eicpL3Rhc2sgfCB4YXJncyByZW5pY2UgLTEw
+          verification: {}
+        group: {}
+        mode: 0550
+        path: /usr/local/bin/etcd-readyz-renice.sh
+        user: {}
+    systemd:
+     units:   
+     - contents: |
+         [Unit]
+         Description=Renice etcd readyz container
+
+         [Timer]
+         OnBootSec=5min
+         OnUnitActiveSec=5min
+
+         [Install]
+         WantedBy=multi-user.target
+       enabled: true
+       name: etcd-renice.timer
+     - contents: |
+         [Unit]
+         Description==Renice etcd readyz container(to be called by a timer)
+
+         [Service]
+         Type=simple
+         ExecStart=/usr/local/bin/etcd-readyz-renice.sh
+       name: etcd-renice.service
+
