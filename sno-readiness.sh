@@ -1,7 +1,7 @@
 #!/bin/bash
 
-if [ ! -f "/usr/bin/yq" ]; then
-  sudo curl -L https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -o /usr/bin/yq; sudo chmod +x /usr/bin/yq
+if [ ! -f "/usr/bin/yq" ] && [ ! -f "/app/vbuild/RHEL7-x86_64/yq/4.25.1/bin/yq" ]; then
+  echo "cannot find yq in the path, please install yq on the node first. ref: https://github.com/mikefarah/yq#install"
 fi
 
 machine_configs=("01-container-mount-namespace-and-kubelet-conf" "02-master-workload-partitioning" "04-accelerated-container-startup-master" "disable-chronyd")
