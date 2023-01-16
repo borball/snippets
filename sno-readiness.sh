@@ -325,6 +325,35 @@ check_kdump(){
   fi
 }
 
+check_chronyd(){
+  echo -e "\n${NC}Checking chronyd.service:"
+  if [[ $(ssh core@$address systemctl is-active chronyd) = 'inactive' ]]; then
+    info "chronyd is inactive."
+  else
+    warn "chronyd is active."
+  fi
+
+  if [[ $(ssh core@$address systemctl is-enabled chronyd) = 'enabled' ]]; then
+    warn "chronyd is enabled."
+  else
+    info "chronyd is not enabled."
+  fi
+}
+
+check_crio_wipe(){
+  echo -e "\n${NC}Checking crop-wipe.service:"
+  if [[ $(ssh core@$address systemctl is-active crio-wipe) = 'inactive' ]]; then
+    info "crio-wipe is inactive."
+  else
+    warn "crio-wipe is active."
+  fi
+
+  if [[ $(ssh core@$address systemctl is-enabled crio-wipe) = 'enabled' ]]; then
+    warn "crio-wipe is enabled."
+  else
+    info "crio-wipe is not enabled."
+  fi
+}
 
 oc get node
 
@@ -344,6 +373,8 @@ if [ $? -eq 0 ]; then
   check_cmdline
   check_kernel
   check_kdump
+  check_chronyd
+  check_crio_wipe
 
   echo -e "\n${NC}Completed the checking."
 else

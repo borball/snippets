@@ -44,7 +44,7 @@ fetch_tuned(){
     if [ $(oc get tuned -n  openshift-cluster-node-tuning-operator |grep $tuned | wc -l) -eq 1 ]; then
       oc get tuned -n  openshift-cluster-node-tuning-operator $tuned -o yaml > "$manifests_folder/$tuned.yaml"
     else
-      warn "Tuned $tuned is not existing."
+      info "Tuned $tuned is not existing."
     fi
   done
 }
