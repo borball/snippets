@@ -4,7 +4,7 @@ In some cases the pods may be evicted and the terminated pods remained in [Conta
 
 The Pod garbage collector (PodGC) cleans up terminated Pods (with a phase of Succeeded or Failed), when the number of Pods exceeds the configured threshold (determined by terminated-pod-gc-threshold in the kube-controller-manager).
 
-Following is the procedure to modify the terminated-pod-gc-threshold in the kube-controller-manager on OpenShift.
+Following is the procedure to modify the terminated-pod-gc-threshold(default value is [12500](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-controller-manager/) in the kube-controller-manager on OpenShift.
 
 ```
 oc patch KubeControllerManager cluster --type merge -p '{"spec": {"unsupportedConfigOverrides":{"extendedArguments": {"terminated-pod-gc-threshold": ["120"]}}}}'
