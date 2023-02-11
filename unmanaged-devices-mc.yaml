@@ -1,0 +1,28 @@
+---
+apiVersion: machineconfiguration.openshift.io/v1
+kind: MachineConfig
+metadata:
+  labels:
+    machineconfiguration.openshift.io/role: master
+  name: 99-master-unmanaged-devices
+spec:
+  config:
+    ignition:
+      config:
+        replace:
+          verification: {}
+      proxy: {}
+      security:
+        tls: {}
+      timeouts: {}
+      version: 3.2.0
+    passwd: {}
+    storage:
+      files:
+        - contents:
+            source: data:text/plain;charset=utf-8;base64,W2tleWZpbGVdCnVubWFuYWdlZC1kZXZpY2VzPWludGVyZmFjZS1uYW1lOmVuczFmMTtpbnRlcmZhY2UtbmFtZTplbnMxZjI7aW50ZXJmYWNlLW5hbWU6ZW5zMWYzO2ludGVyZmFjZS1uYW1lOmVuczFmNDtpbnRlcmZhY2UtbmFtZTplbnMyZjA7aW50ZXJmYWNlLW5hbWU6ZW5zMmYxO2ludGVyZmFjZS1uYW1lOmVuczJmMjtpbnRlcmZhY2UtbmFtZTplbnMyZjMK
+            verification: {}
+          group: {}
+          mode: 0420
+          path: /etc/NetworkManager/conf.d/99-unmanaged-devices.conf
+          user: {}
