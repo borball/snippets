@@ -1,0 +1,35 @@
+---
+    apiVersion: machineconfiguration.openshift.io/v1
+    kind: MachineConfig
+    metadata: 
+      labels: 
+        machineconfiguration.openshift.io/role: master
+      name: 99-set-allmulticast-on
+    spec: 
+      config:
+        ignition: 
+          config: 
+            replace: 
+              verification: {}
+          proxy: {}
+          security: 
+            tls: {}
+          timeouts: {}
+          version: 3.2.0
+        passwd: {}
+        systemd:
+         units:   
+         - contents: |
+             [Unit]
+             Description=set allmulticast on
+             After=NetworkManager.service
+             
+             [Service]
+             Type=oneshot
+             RemainAfterExit=yes
+             ExecStart=ip link set dev ens1f0 allmulticast on
+    
+             [Install]
+             WantedBy=multi-user.target
+           enabled: true
+           name: set-allmulticast-on.service
