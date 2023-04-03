@@ -5,9 +5,17 @@ metadata:
 spec:
   template:
     spec:
+      initContainers:
+        - name: init
+          image: "hub-helper:5000/e810-fw-devlink:4.20"
+          imagePullPolicy: IfNotPresent
+          command: ["rpm-ostree", "usroverlay"]
       containers:
         - name: nvmupdate
-          image: "quay.io/bzhai/e810-devlink:4.20"
-          imagePullPolicy: IfNotPresent
-          command: ["/E810/Linux_x64/devlink.sh" "ens1f0"]
+          image: "hub-helper:5000/e810-fw-devlink:4.20"
+          imagePullPolicy: Always
+          command: ["/bin/bash", "-x", "/E810/Linux_x64/devlink.sh", "ens1f0"]
+      securityContext:
+        privileged: true
+      hostNetwork: true
       restartPolicy: Never

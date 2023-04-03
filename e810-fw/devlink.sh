@@ -7,8 +7,6 @@
 #
 #   ./devlink.sh <ethX>
 
-basedir="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
-
 usage()
 {
   echo
@@ -28,12 +26,10 @@ esac
 # exit when any command fails
 set -e
 
+basedir="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 
 # default config file is nvmupdate.cfg from the NVMUpdate package downloaded
-NVMCONFIG="nvmupdate.cfg"
-
-
-
+NVMCONFIG="$basedir/nvmupdate.cfg"
 
 #1. get the EEPID/eetrack ID of the NIC to be updated
 EEPID=$(ethtool -i $PF | grep firmware-version | cut -d ' ' -f 3)
@@ -72,8 +68,6 @@ echo "device rev: "$DEVICE_REV
 DEVICE_INFO=$(echo "DEVICE: "$DEVICE)
 SUBDEVICE_INFO=$(echo "SUBDEVICE: "$SUBDEVICE)
 DEVICE_REV_INFO=$(echo "REVISION: "$DEVICE_REV)
-
-
 
 
 #3. find the matching BIN file in nvmupdate.cfg based on the current EEPID
@@ -128,3 +122,6 @@ echo "devlink dev flash pci/$PCI file $BIN_FILE"
 
 
 devlink dev flash "pci/$PCI" file $BIN_FILE
+
+devlink dev reload "pci/$PCI"
+
