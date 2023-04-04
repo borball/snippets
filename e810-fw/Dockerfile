@@ -5,4 +5,4 @@ RUN dnf install -y ethtool iproute pciutils && curl -LO https://downloadmirror.i
 
 COPY devlink.sh /E810/Linux_x64/devlink.sh
 
-COPY fupgrade-fw.sh /E810/Linux_x64/fupgrade-fw.sh
+COPY upgrade-fw.sh /E810/Linux_x64/upgrade-fw.sh
