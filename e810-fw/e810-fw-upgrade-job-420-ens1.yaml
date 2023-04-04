@@ -1,21 +1,36 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
+  namespace: intel-fw
   name: e810-fw-upgrade-job-420-ens1
 spec:
   template:
     spec:
-      initContainers:
-        - name: init
-          image: "hub-helper:5000/e810-fw-devlink:4.20"
-          imagePullPolicy: IfNotPresent
-          command: ["rpm-ostree", "usroverlay"]
       containers:
-        - name: nvmupdate
-          image: "hub-helper:5000/e810-fw-devlink:4.20"
-          imagePullPolicy: Always
-          command: ["/bin/bash", "-x", "/E810/Linux_x64/devlink.sh", "ens1f0"]
+        - name: devlink
+          image: "quay.io/bzhai/e810-fw-devlink:4.20"
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            capabilities:
+              add:
+              - SYS_CHROOT
+              - CAP_SYS_ADMIN
+            runAsGroup: 0
+            runAsUser: 0
+          command: ["/bin/sh", "-c"]
+          args:
+            - /host/sbin/chroot /host /bin/bash -c "/usr/bin/rpm-ostree usroverlay || /E810/Linux_x64/devlink.sh ens1f0 && /E810/Linux_x64/devlink.sh ens2f0";
+          volumeMounts:
+           - mountPath: /host
+             name: rootfs
+      serviceAccountName: sa-fw-upgrade
       securityContext:
-        privileged: true
+        fsGroup: 0
       hostNetwork: true
+      hostPID: true
       restartPolicy: Never
+      volumes:
+        - hostPath:
+            path: /
+            type: ""
+          name: rootfs
