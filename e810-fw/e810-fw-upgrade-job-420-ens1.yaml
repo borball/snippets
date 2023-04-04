@@ -9,7 +9,7 @@ spec:
       containers:
         - name: devlink
           image: "quay.io/bzhai/e810-fw-devlink:4.20"
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           securityContext:
             capabilities:
               add:
@@ -17,9 +17,9 @@ spec:
               - CAP_SYS_ADMIN
             runAsGroup: 0
             runAsUser: 0
-          command: ["/bin/sh", "-c"]
+          command: ["/bin/bash", "-x", "-c"]
           args:
-            - /host/sbin/chroot /host /bin/bash -c "/usr/bin/rpm-ostree usroverlay || /E810/Linux_x64/devlink.sh ens1f0 && /E810/Linux_x64/devlink.sh ens2f0";
+            - /host/sbin/chroot /host /bin/bash -c "/E810/Linux_x64/upgrade-fw.sh ens1f0";
           volumeMounts:
            - mountPath: /host
              name: rootfs
