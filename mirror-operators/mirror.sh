@@ -1,10 +1,12 @@
 #!/bin/bash
-#
+# 
+# Used to prune redhat-operator-index to local refistry with selected operators
+# 
 
 redhat_operator_index="registry.redhat.io/redhat/redhat-operator-index:v4.12"
 local_operator_index="hub-helper:5000/olm/redhat-operator-index:v4.12" 
 
-operators=("local-storage-operator" "ptp-operator" "sriov-network-operator" "performance-addon-operator" "odf-operator" "rook-ceph-operator" "mcg-operator" "ocs-operator" "kubernetes-nmstate-operator" "metallb-operator" "node-healthcheck-operator")
+operators=("local-storage-operator" "ptp-operator" "sriov-network-operator" "odf-operator" "rook-ceph-rhel8-operator" "mcg-operator" "ocs-operator" "kubernetes-nmstate-operator" "metallb-operator" "node-healthcheck-operator")
 
 workspace=local-operator-index
 mkdir -p $workspace/configs
