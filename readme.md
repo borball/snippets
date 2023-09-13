@@ -8,3 +8,5 @@
 - [How to put network devices as unmanaged](unmanaged-devices-mc.md)
 - [How to update kubelet config with PerformanceProfile](kubeletconfig.md)
 - [Script to upgrade E810 fw with nvm devlink](devlink.sh)
+- [Add additional partition in the same disk OCP installed in day1](98-disk-partition-mc.yaml)
+- [Download kubeconfig files of managed clusters from RH ACM](download-mcl-kubeconfigs.sh)
