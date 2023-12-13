@@ -22,7 +22,8 @@ if [[ -a $cpu_manager_state_file ]]; then
     else
       echo "will update to $banned_cpus_mask in /etc/sysconfig/irqbalance"
       sed -i "s/^IRQBALANCE_BANNED_CPUS.*/$update_banned_cpus_str/" /etc/sysconfig/irqbalance
-      systemctl restart irqbalance.service
+      echo "restart irqbalance.service"
+      /host/sbin/chroot /host /usr/bin/systemctl restart irqbalance.service
     fi
   fi
 fi
