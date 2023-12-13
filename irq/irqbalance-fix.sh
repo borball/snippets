@@ -16,6 +16,7 @@ if [[ -a $cpu_manager_state_file ]]; then
     banned_cpus_mask=$(printf '%016llx\n' "$cpu_mask" |sed -r -e 's/^.{8}/&,/')
     current_banned_cpus_str=$(grep ^IRQBALANCE_BANNED_CPUS /host/etc/sysconfig/irqbalance)
     update_banned_cpus_str="IRQBALANCE_BANNED_CPUS=\"$banned_cpus_mask\""
+    echo "current banned cpus: $current_banned_cpus_str"
     if [[ "$current_banned_cpus_str" = "$update_banned_cpus_str" ]]; then
       echo "no update in /etc/sysconfig/irqbalance"
     else
