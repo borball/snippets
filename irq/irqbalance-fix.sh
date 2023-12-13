@@ -1,7 +1,7 @@
 #!/bin/bash
 
 set -x
-cpu_manager_state_file="/var/lib/kubelet/cpu_manager_state"
+cpu_manager_state_file="/host/var/lib/kubelet/cpu_manager_state"
 
 if [[ -a $cpu_manager_state_file ]]; then
   cat $cpu_manager_state_file |jq
@@ -15,13 +15,13 @@ if [[ -a $cpu_manager_state_file ]]; then
       cpu_mask=$(($cpu_mask | $cpu_bit))
     done
     banned_cpus_mask=$(printf '%016llx\n' "$cpu_mask" |sed -r -e 's/^.{8}/&,/')
-    current_banned_cpus_str=$(grep ^IRQBALANCE_BANNED_CPUS /etc/sysconfig/irqbalance)
+    current_banned_cpus_str=$(grep ^IRQBALANCE_BANNED_CPUS /host/etc/sysconfig/irqbalance)
     update_banned_cpus_str="IRQBALANCE_BANNED_CPUS=\"$banned_cpus_mask\""
     if [[ "$current_banned_cpus_str" = "$update_banned_cpus_str" ]]; then
       echo "no update in /etc/sysconfig/irqbalance"
     else
       echo "will update to $banned_cpus_mask in /etc/sysconfig/irqbalance"
-      sed -i "s/^IRQBALANCE_BANNED_CPUS.*/$update_banned_cpus_str/" /etc/sysconfig/irqbalance
+      sed -i "s/^IRQBALANCE_BANNED_CPUS.*/$update_banned_cpus_str/" /host/etc/sysconfig/irqbalance
       echo "restart irqbalance.service"
       /host/sbin/chroot /host /usr/bin/systemctl restart irqbalance.service
     fi
