@@ -5,7 +5,7 @@ FROM registry.access.redhat.com/ubi8/ubi
 
 WORKDIR /
 
-COPY coremask.sh /
+COPY irqbalance-fix.sh.sh /
 
 USER root
 USER 1001

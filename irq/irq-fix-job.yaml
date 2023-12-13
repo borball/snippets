@@ -15,11 +15,10 @@ spec:
             runAsUser: 0
           command: ["/bin/bash", "-x", "-c"]
           args:
-            - /coremask.sh $(cat /host/var/lib/kubelet/cpu_manager_state |jq -r '.. |.baseband? |select(. != null)')
+            - /irqbalance-fix.sh
           volumeMounts:
            - mountPath: /host
              name: rootfs
-      serviceAccountName: irq-fix
       securityContext:
         fsGroup: 0
       restartPolicy: Never
