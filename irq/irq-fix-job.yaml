@@ -20,7 +20,7 @@ spec:
             runAsUser: 0
           command: ["/bin/bash", "-x", "-c"]
           args:
-            - /host/sbin/chroot /host /bin/bash -c /irqbalance-fix.sh
+            - /irqbalance-fix.sh && /host/sbin/chroot /host /usr/bin/systemctl restart irqbalance.service
           volumeMounts:
             - mountPath: /host
               name: rootfs
