@@ -1,0 +1,30 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  namespace: default
+  name: irq-fix
+spec:
+  template:
+    spec:
+      containers:
+        - name: irq-fix
+          image: "quay.io/bzhai/irq-fix:0.1"
+          imagePullPolicy: Always
+          securityContext:
+            runAsGroup: 0
+            runAsUser: 0
+          command: ["/bin/bash", "-x", "-c"]
+          args:
+            - /coremask.sh $(cat /host/var/lib/kubelet/cpu_manager_state |jq -r '.. |.baseband? |select(. != null)')
+          volumeMounts:
+           - mountPath: /host
+             name: rootfs
+      serviceAccountName: irq-fix
+      securityContext:
+        fsGroup: 0
+      restartPolicy: Never
+      volumes:
+        - hostPath:
+            path: /
+            type: ""
+          name: rootfs
