@@ -1,6 +1,5 @@
 #!/bin/bash
 
-set -x
 cpu_manager_state_file="/host/var/lib/kubelet/cpu_manager_state"
 
 if [[ -a $cpu_manager_state_file ]]; then
