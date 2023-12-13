@@ -11,17 +11,23 @@ spec:
           image: "quay.io/bzhai/irq-fix:0.1"
           imagePullPolicy: Always
           securityContext:
+            privileged: true
+            capabilities:
+              add:
+                - SYS_CHROOT
+                - CAP_SYS_ADMIN
             runAsGroup: 0
             runAsUser: 0
           command: ["/bin/bash", "-x", "-c"]
           args:
-            - /irqbalance-fix.sh
+            - /host/sbin/chroot /host /bin/bash -c /irqbalance-fix.sh
           volumeMounts:
-           - mountPath: /host
-             name: rootfs
-      securityContext:
-        fsGroup: 0
+            - mountPath: /host
+              name: rootfs
       restartPolicy: Never
+      hostIPC: true
+      hostNetwork: true
+      hostPID: true
       volumes:
         - hostPath:
             path: /
