@@ -10,3 +10,5 @@
 - [Script to upgrade E810 fw with nvm devlink](devlink.sh)
 - [Add additional partition in the same disk OCP installed in day1](98-disk-partition-mc.yaml)
 - [Download kubeconfig files of managed clusters from RH ACM](download-mcl-kubeconfigs.sh)
+- [Sort policies by wave](sort-ztp-policy-by-wave.md)
+- 
