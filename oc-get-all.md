@@ -1,6 +1,7 @@
 ## Alias
 
-```alias ocgetall='oc api-resources --verbs=list --namespaced -o name | xargs -t -n 1 oc get --show-kind --ignore-not-found 2>/dev/null'
+```shell
+alias ocgetall='oc api-resources --verbs=list --namespaced -o name | xargs -t -n 1 oc get --show-kind --ignore-not-found 2>/dev/null'
 ```
 
 ## Example 1
