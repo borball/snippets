@@ -1,5 +1,7 @@
 ### MachineConfig
 
+Will use ens[1-2]f[0-3] as en example, can change this based on your lab situation:
+
 ```shell
 cat << EOF | base64 -w0
 #!/usr/bin/env bash
