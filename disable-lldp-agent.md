@@ -104,7 +104,6 @@ done
 ### MachineConfig
 
 ```yaml
-
 apiVersion: machineconfiguration.openshift.io/v1
 kind: MachineConfig
 metadata:
@@ -119,7 +118,7 @@ spec:
       files:
       - contents:
           compression: gzip
-          source: data:;base64,H4sIACnitWcCA71UTW+cMBC98ytmHQ5QCXm3VauUaA9R1FZ7IVIVqQeEkBcPH4pjr7B3kyrsf68N24Wttml6CReD/ebN85sZLmZ03Ui6Zrr2PLNtZa7KMheCb3JWoTRBCM8egFAFE5BLNLlkD7j0F57dbUpIU5hBxIHqn5oWgmlNLYj6z0fsnnLcNQVSyLIrMDVKGwmARa2A/Lj+nqySbzFIBQMMSrWVHBr5GkrSU7XohNvXshml7lBy1eYNX/pBwcxr2IaQcOQY9v+LY1jC0R3ij1IIzJYwf7qcX36yZkDXHQDHPD2AzJ8WHz9/IC/6dTBrKgHSIVEwyRjGAzCYJAkz4Aq1tdzAAzNFDYa1FRpIVjeQDvLiQUP2gsFjj1h30NRGKQFRpGv1GG3aZheVglX6VGFXtbiB8jFywVEf3BVb4xoohqiE951p3QdJ47Vg8j7OSDh1csxJYGmdUvJPl0YdaP4q40QA2IbvY9/yRr/rmdzerW6+xFDUTFbIz5b1VK1R7nSUunclQqFxwrpKvt72IzXQgkTklrxU7b8TxGfobdn3nufCN0VzaCQ3oX4g9HH411tN7THl1ilsNXXTMLdP/C68sg1nac78Xg4UC/BHZjdboceVRO8Xycm2q54EAAA=[kube:admin@vduhw40-exilis/pBwcxr2IaQcOQY9v+LY1jC0R3ij1IIzJYwf7qcX36yZkDXHQDHPD2AzJ8WHz9/IC/6dTBrKgHSIVEwyRjGAzCYJAkz4Aq1tdzAAzNFDYa1FRpIVjeQDvLiQUP2gsFjj1h30NRGKQFRpGv1GG3aZheVglX6VGFXtbiB8jFywVEf3BVb4xoohqiE951p3QdJ47Vg8j7OSDh1csxJYGmdUvJPl0YdaP4q40QA2IbvY9/yRr/rmdzerW6+xFDUTFbIz5b1VK1R7nSUunclQqFxwrpKvt72IzXQgkTklrxU7b8TxGfobdn3nufCN0VzaCQ3oX4g9HH411tN7THl1ilsNXXTMLdP/C68sg1nac78Xg4UC/BHZjdboceVRO8Xycm2q54EAAA=
+          source: data:;base64,H4sIAKAktmcAA71UTW+cMBC98ytmHQ5QCXm3VauUaA9R1FZ7IVIVqQeEkBcPH4pjr7B3kyrsf68N24Wttml6CReD/ebN85sZLmZ03Ui6Zrr2PLNtZa7KMheCb3JWoTRBCM8egFAFE5BLNLlkD7j0F57dbUpIU5hBxIHqn5oWgmlNLYj6z0fsnnLcNQVSyLIrMDVKGwmARa2A/Lj+nqySbzFIBQMMSrWVHBr5GkrSU7XohNvXshml7lBy1eYNX/pBwcxr2IaQcOQY9v+LY1jC0R3ij1IIzJYwf7qcX36yZkDXHQDHPD2AzJ8WHz9/IC/6dTBrKgHSIVEwyRjGAzCYJAkz4Aq1tdzAAzNFDYa1FRpIVjeQDvLiQUP2gsFjj1h30NRGKQFRpGv1GG3aZheVglX6VGFXtbiB8jFywVEf3BVb4xoohqiE951p3QdJ47Vg8j7OSDh1csxJYGmdUvJPl0YdaP4q40QA2IbvY9/yRr/rmdzerW6+xFDUTFbIz5b1VK1R7nSUunclQqFxwrpKvt72IzXQgkTklrxU7b8TxGfobdn3nufCN0VzaCQ3oX4g9HH411tN7THl1ilsNXXTMLdP/C68sg1nac78Xg4UC/BHZjdboceVRO8Xycm2q54EAAA=
           verification: {}
         filesystem: root
         mode: 493
@@ -140,4 +139,5 @@ spec:
           WantedBy=multi-user.target
         enabled: true
         name: turnoff-intel-e810-lldp-agent.service
+
 ```
